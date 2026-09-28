@@ -142,13 +142,13 @@ O objetivo deste documento é fornecer uma visão clara, sequencial e objetiva d
 
 | Item Solicitado | DC01 | WIN01 | DEBIAN01 | ROCKY01 | Status |
 |---|:---:|:---:|:---:|:---:|:---:|
-| Subir Active Directory / DC | ✅ | — | — | — | **APROVADO** |
-| Adicionar Windows no Domínio | — | ✅ | — | — | **APROVADO** |
-| Criar Usuários e Grupos no AD | ✅ | — | — | — | **APROVADO** |
-| Aplicar Regras de GPO | — | ✅ | — | — | **APROVADO** |
-| Criar 2 Usuários e 2 Grupos Locais | — | — | ✅ | ✅ | **APROVADO** |
-| Atribuir `sudo root` a um Grupo Local | — | — | ✅ | ✅ | **APROVADO** |
-| Adicionar Distribuições Linux no AD | — | — | ✅ | ✅ | **APROVADO** |
+| Subir Active Directory / DC | 🔹 | — | — | — | **⏳ PENDENTE** |
+| Adicionar Windows no Domínio | — | 🔹 | — | — | **⏳ PENDENTE** |
+| Criar Usuários e Grupos no AD | 🔹 | — | — | — | **⏳ PENDENTE** |
+| Aplicar Regras de GPO | — | 🔹 | — | — | **⏳ PENDENTE** |
+| Criar 2 Usuários e 2 Grupos Locais | — | — | 🔹 | 🔹 | **⏳ PENDENTE** |
+| Atribuir `sudo root` a um Grupo Local | — | — | 🔹 | 🔹 | **⏳ PENDENTE** |
+| Adicionar Distribuições Linux no AD | — | — | 🔹 | 🔹 | **⏳ PENDENTE** |
 
 ---
 
