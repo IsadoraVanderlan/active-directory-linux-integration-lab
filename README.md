@@ -55,10 +55,10 @@ O objetivo deste documento é fornecer uma visão clara, sequencial e objetiva d
 
 ---
 
-#### 1.2. Ingresso do Windows no Domínio (Domain Join)
-- Configuração da placa de rede da estação `WIN01` apontando o servidor DNS para `192.168.10.10`.
-- Ingresso do host `WIN01` no domínio `lab.local`.
-- Validação do logon utilizando contas do Active Directory.
+#### 1.2. Instalação e Preparação da Estação Cliente (WIN01)
+- Criação e alocação de recursos da VM WIN01 no Hyper-V (1 GB RAM dinâmica / 127 GB Disco).
+- Instalação do Windows 11 Pro com contorno dos requisitos mínimos de hardware via registo (BypassRAMCheck).
+- Finalização do OOBE e criação de conta local inicial para acesso ao sistema.
 
 - **[Vídeo — Windows entrando no domínio](#)**  
   *Demonstrando: Configuração do cliente, resolução DNS, ingresso no domínio e autenticação de usuário.*
