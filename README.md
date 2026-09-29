@@ -50,8 +50,8 @@ O objetivo deste documento é fornecer uma visão clara, sequencial e objetiva d
 - Promoção a Controlador de Domínio (DC) e criação do domínio **`lab.local`**.
 - Validação da resolução de nomes DNS interna e registros de autoridade.
 
-- **[Vídeo — Implementação do Active Directory](./Videos/1.gif)**  
-  *Demonstrando: Instalação do AD DS, promoção a DC, criação do domínio `lab.local` e validação do DNS.*
+![Demonstração da Configuração do Active Directory](./Videos/1.gif)
+  *Demonstrando: Configuração do cliente, resolução DNS, ingresso no domínio e autenticação de usuário.*
 
 ---
 
@@ -60,8 +60,8 @@ O objetivo deste documento é fornecer uma visão clara, sequencial e objetiva d
 - Instalação do Windows 11 Pro com contorno dos requisitos mínimos de hardware via registo (BypassRAMCheck).
 - Finalização do OOBE e criação de conta local inicial para acesso ao sistema.
 
-![Demonstração da Configuração do Active Directory](./Videos/1.gif)
-  *Demonstrando: Configuração do cliente, resolução DNS, ingresso no domínio e autenticação de usuário.*
+![Demonstração do Windows entrando no domínio](./Videos/2.gif)
+  *Demonstrando: Criação das contas `admin.lab` e `user.lab`, criação dos grupos e associação das permissões.*
 
 ---
 
@@ -73,7 +73,7 @@ O objetivo deste documento é fornecer uma visão clara, sequencial e objetiva d
   - `admin.lab` ➔ Adicionado ao grupo `GG-IT-Admins`
   - `user.lab` ➔ Adicionado ao grupo `GG-IT-Users`
 
-![Demonstração do Windows entrando no domínio](./Videos/2.gif)
+- **[Vídeo — Usuários, grupos e permissões no AD](#)**  
   *Demonstrando: Criação das contas `admin.lab` e `user.lab`, criação dos grupos e associação das permissões.*
 
 ---
