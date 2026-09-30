@@ -58,10 +58,10 @@ O objetivo deste documento é fornecer uma visão clara, sequencial e objetiva d
 #### 1.2. Instalação e Preparação da Estação Cliente (WIN01)
 - Criação e alocação de recursos da VM WIN01 no Hyper-V (1 GB RAM dinâmica / 127 GB Disco).
 - Instalação do Windows 11 Pro com contorno dos requisitos mínimos de hardware via registo (BypassRAMCheck).
-- Finalização do OOBE e criação de conta local inicial para acesso ao sistema.
+- Finalização e criação de conta local inicial para acesso ao sistema.
 
 ![Demonstração do Windows entrando no domínio](./Videos/2.gif)
-  *Demonstrando: Criação das contas `admin.lab` e `user.lab`, criação dos grupos e associação das permissões.*
+  *Demonstrando: Criação e alocação de recursos da VM WIN01, criação de conta local inicial.*
 
 ---
 
@@ -73,22 +73,30 @@ O objetivo deste documento é fornecer uma visão clara, sequencial e objetiva d
   - `admin.lab` ➔ Adicionado ao grupo `GG-IT-Admins`
   - `user.lab` ➔ Adicionado ao grupo `GG-IT-Users`
 
-- **[Vídeo — Usuários, grupos e permissões no AD](#)**  
+- **[Vídeo — Usuários, grupos e permissões no AD](./Videos/3.gif)**  
   *Demonstrando: Criação das contas `admin.lab` e `user.lab`, criação dos grupos e associação das permissões.*
 
 ---
 
-#### 1.4. Aplicação e Validação de Regras de GPO
-- Criação e vinculação da **`GPO-IT-Baseline`** com restrições e políticas de segurança na OU/domínio.
-- Execução de comandos no cliente `WIN01` para propagação e geração de relatório:
-  ```cmd
-  gpupdate /force
-  gpresult /r
-  gpresult /h C:\gpresult.html
+#### 1.4. Aplicação e Validação de Políticas de Segurança via GPO
+
+- Criação e vinculação da `GPO-IT-Baseline` à OU `TI`.
+- Configuração de políticas de segurança para os computadores e usuários do ambiente:
+  - definição de requisitos de senha;
+  - configuração de bloqueio de conta após tentativas de autenticação inválidas;
+  - bloqueio de sessão por inatividade.
+- Aplicação e validação das políticas no cliente `CLI01`.
+
+Após a configuração da GPO, foram utilizados os seguintes comandos no cliente para atualização e validação das políticas:
+
+```powershell 
+gpupdate /force
+gpresult /r
+gpresult /h C:\gpresult.html /f
   ```
 
-- **[Vídeo — Implementação e validação da GPO](#)**  
-  *Demonstrando: Criação da GPO, aplicação no domínio, execução do `gpupdate /force` e geração do relatório `gpresult`.*
+- **[Vídeo — Implementação e validação da GPO](./Videos/4.gif)**  
+  *Demonstrando: configuração de controles de segurança na GPO-IT-Baseline, aplicação da política na estação CLI01 e validação das configurações por meio do gpresult.*
 
 ---
 
