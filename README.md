@@ -55,7 +55,7 @@ O objetivo deste projeto é documentar, de forma clara e sequencial, a implement
 - Instalação e provisionamento das funções **AD DS** e **DNS** no servidor `DC01`.
 - Promoção do servidor a Controlador de Domínio (DC).
 - Criação do domínio `lab.local`.
-- Configuração do endereço IPv4 `10.10.10.2`.
+- Configuração do endereço IPv4.
 - Validação da resolução de nomes DNS interna.
 
 ![Demonstração da Configuração do Active Directory](./Videos/1.gif)
@@ -69,8 +69,8 @@ O objetivo deste projeto é documentar, de forma clara e sequencial, a implement
 - Criação e alocação de recursos da VM `CLI01` no Hyper-V.
 - Instalação do Windows 11 Pro.
 - Configuração inicial da estação.
-- Configuração do endereço IPv4 `10.10.10.10`.
-- Configuração do DNS apontando para o Domain Controller `10.10.10.2`.
+- Configuração do endereço IPv4.
+- Configuração do DNS apontando para o Domain Controller.
 - Ingresso da estação no domínio `lab.local`.
 - Validação da comunicação e autenticação no domínio.
 
@@ -126,90 +126,33 @@ gpresult /h C:\gpresult.html /f
 
 #### 2.1. Configuração do Ubuntu (`UBUNTU01`)
 
-**Configuração de rede:**
-
-- Hostname: `ubuntu01`
-- Interface: `eth0`
-- IPv4: `10.10.10.30/24`
-- Rede: `10.10.10.0/24`
-- Domain Controller / DNS: `10.10.10.2`
-
-**Criação de usuários e grupos locais:**
-
-- Grupos:
-  - `linux-admins`
-  - `linux-users`
-
-- Usuários:
-  - `linuxadmin`
-  - `linuxuser`
-
-- Associações:
-  - `linuxadmin` → `linux-admins`
-  - `linuxuser` → `linux-users`
-
-**Controle de elevação de privilégios (sudoers):**
-
-- Concessão de acesso `sudo` ao grupo `linux-admins`.
-- Validação por meio do comando:
+- Configuração de rede do servidor Ubuntu com IP `10.10.10.30/24` e DNS apontando para o Domain Controller (`10.10.10.2`).
+- Criação dos grupos locais `linux-admins` e `linux-users`.
+- Criação dos usuários `linuxadmin` e `linuxuser` e associação aos respectivos grupos.
+- Concessão de privilégios `sudo` ao grupo `linux-admins`.
+- Validação da comunicação e resolução DNS com o domínio `lab.local`.
+- Instalação e configuração do `realmd` e `SSSD` para integração com o Active Directory.
+- Ingresso do servidor no domínio `lab.local` e validação da identidade do usuário do AD.
 
 ```bash
-sudo whoami
-```
-
-Resultado esperado:
-
-```text
-root
-```
-
-**Integração com o Active Directory:**
-
-O Ubuntu será configurado para utilizar o servidor `DC01` (`10.10.10.2`) como DNS interno.
-
-Antes do ingresso no domínio, serão validados:
-
-```bash
-ping -c 4 10.10.10.2
-nslookup lab.local
 realm discover lab.local
-```
-
-Após a validação da conectividade e resolução DNS, o ingresso no domínio será realizado utilizando `realmd` e `SSSD`:
-
-```bash
 realm join lab.local -U admin.lab
-```
-
-A identidade do usuário do Active Directory será validada com:
-
-```bash
 id admin.lab@lab.local
 ```
 
 **Status:** 🚧 Em andamento.
 
-**Vídeo:** será adicionado após a conclusão da etapa.
-
 ---
 
 #### 2.2. Configuração do Rocky Linux (`ROCKY01`)
 
-Esta etapa será executada após a conclusão e validação da integração do `UBUNTU01`.
-
-Serão realizadas:
-
-- configuração de rede e DNS;
-- criação dos grupos `linux-admins` e `linux-users`;
-- criação dos usuários `linuxadmin` e `linuxuser`;
-- configuração de privilégios administrativos;
-- instalação do `realmd` e `SSSD`;
-- descoberta do domínio `lab.local`;
-- ingresso no Active Directory;
-- validação do serviço `SSSD`;
-- validação de usuários do domínio.
-
-Comandos principais previstos:
+- Configuração de rede e DNS apontando para o Domain Controller (`10.10.10.2`).
+- Criação dos grupos locais `linux-admins` e `linux-users`.
+- Criação dos usuários `linuxadmin` e `linuxuser` e associação aos respectivos grupos.
+- Concessão de privilégios `sudo` ao grupo `linux-admins`.
+- Instalação e configuração do `realmd` e `SSSD`.
+- Ingresso do servidor no domínio `lab.local`.
+- Validação do serviço `SSSD` e das identidades do Active Directory.
 
 ```bash
 realm discover lab.local
