@@ -55,12 +55,12 @@ O objetivo deste documento é fornecer uma visão clara, sequencial e objetiva d
 
 ---
 
-#### 1.2. Instalação e Preparação da Estação Cliente (WIN01)
+#### 1.2. Instalação e Preparação da Estação Cliente (CLI01)
 - Criação e alocação de recursos da VM WIN01 no Hyper-V (1 GB RAM dinâmica / 127 GB Disco).
 - Instalação do Windows 11 Pro com contorno dos requisitos mínimos de hardware via registo (BypassRAMCheck).
 - Finalização e criação de conta local inicial para acesso ao sistema.
 
-![Demonstração do Windows entrando no domínio](./Videos/2.gif)
+![Demonstração do Windows sendo aplicado no domínio](./Videos/2.gif)
   *Demonstrando: Criação e alocação de recursos da VM WIN01, criação de conta local inicial.*
 
 ---
@@ -73,7 +73,7 @@ O objetivo deste documento é fornecer uma visão clara, sequencial e objetiva d
   - `admin.lab` ➔ Adicionado ao grupo `GG-IT-Admins`
   - `user.lab` ➔ Adicionado ao grupo `GG-IT-Users`
 
-- **[Vídeo — Usuários, grupos e permissões no AD](./Videos/3.gif)**  
+-![Demonstração — Usuários, grupos e permissões no AD](./Videos/3.gif) 
   *Demonstrando: Criação das contas `admin.lab` e `user.lab`, criação dos grupos e associação das permissões.*
 
 ---
@@ -95,7 +95,7 @@ gpresult /r
 gpresult /h C:\gpresult.html /f
   ```
 
-- **[Vídeo — Implementação e validação da GPO](./Videos/4.gif)**  
+-![Demonstração — Implementação e validação da GPO](./Videos/4.gif) 
   *Demonstrando: configuração de controles de segurança na GPO-IT-Baseline, aplicação da política na estação CLI01 e validação das configurações por meio do gpresult.*
 
 ---
