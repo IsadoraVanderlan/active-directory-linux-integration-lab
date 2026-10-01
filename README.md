@@ -58,7 +58,7 @@ O objetivo deste projeto é documentar, de forma clara e sequencial, a implement
 - Configuração do endereço IPv4.
 - Validação da resolução de nomes DNS interna.
 
-![Demonstração da Configuração do Active Directory](./Videos/1.gif)
+![Demonstração da Configuração do Active Directory](./Videos/1.1.gif)
 
 *Demonstrando: configuração do Active Directory, DNS e domínio `lab.local`.*
 
@@ -74,7 +74,7 @@ O objetivo deste projeto é documentar, de forma clara e sequencial, a implement
 - Ingresso da estação no domínio `lab.local`.
 - Validação da comunicação e autenticação no domínio.
 
-![Demonstração do Windows sendo aplicado no domínio](./Videos/2.gif)
+![Demonstração do Windows sendo aplicado no domínio](./Videos/1.2.gif)
 
 *Demonstrando: preparação da estação Windows 11 e ingresso no domínio `lab.local`.*
 
@@ -92,7 +92,7 @@ O objetivo deste projeto é documentar, de forma clara e sequencial, a implement
 - `admin.lab` → associado ao grupo `GG-IT-Admins`
 - `user.lab` → associado ao grupo `GG-IT-Users`
 
-![Demonstração — Usuários, grupos e permissões no AD](./Videos/3.gif)
+![Demonstração — Usuários, grupos e permissões no AD](./Videos/1.3.gif)
 
 *Demonstrando: criação das contas, grupos de segurança e associação dos usuários aos respectivos grupos.*
 
@@ -116,7 +116,7 @@ gpresult /r
 gpresult /h C:\gpresult.html /f
 ```
 
-![Demonstração — Implementação e validação da GPO](./Videos/4.gif)
+![Demonstração — Implementação e validação da GPO](./Videos/1.4.gif)
 
 *Demonstrando: configuração da `GPO-IT-Baseline`, aplicação das políticas na estação `CLI01` e validação por meio do `gpresult`.*
 
@@ -136,11 +136,14 @@ gpresult /h C:\gpresult.html /f
 
 ```bash
 realm discover lab.local
-realm join lab.local -U admin.lab
-id admin.lab@lab.local
+sudo realm join lab.local -U Administrator
+realm list
+id Administrator@lab.local
 ```
 
-**Status:** 🚧 Em andamento.
+![Demonstração — Configuração e integração do Ubuntu ao Active Directory](./Videos/2.1.gif)
+
+*Demonstrando: configuração do servidor `UBUNTU01`, criação de usuários e grupos locais, configuração de privilégios administrativos, comunicação com o Domain Controller e ingresso no domínio `lab.local` utilizando `realmd` e `SSSD`.*
 
 ---
 
@@ -160,27 +163,12 @@ realm join lab.local -U admin.lab
 systemctl status sssd
 ```
 
-**Status:** ⏳ Pendente.
+![Demonstração — Configuração e integração do Rocky Linux ao Active Directory](./Videos/2.2.gif)
+
+*Demonstrando: configuração do servidor `ROCKY01`, criação de usuários e grupos locais, configuração de privilégios administrativos, comunicação com o Domain Controller e ingresso no domínio `lab.local` utilizando `realmd` e `SSSD`.*
 
 ---
 
-## Validações e Matriz de Testes
-
-| Item | DC01 | CLI01 | UBUNTU01 | ROCKY01 | Status |
-|---|:---:|:---:|:---:|:---:|:---:|
-| Configurar Active Directory / DC | ✓ | — | — | — | ✅ Concluído |
-| Configurar DNS interno | ✓ | ✓ | — | — | ✅ Concluído |
-| Adicionar Windows ao domínio | — | ✓ | — | — | ✅ Concluído |
-| Criar usuários e grupos no AD | ✓ | — | — | — | ✅ Concluído |
-| Aplicar e validar GPO | — | ✓ | — | — | ✅ Concluído |
-| Configurar rede do Ubuntu | — | — | ✓ | — | ✅ Concluído |
-| Criar usuários e grupos locais | — | — | 🚧 | ⏳ | 🚧 Em andamento |
-| Configurar privilégios `sudo` | — | — | 🚧 | ⏳ | 🚧 Em andamento |
-| Validar comunicação Linux → DC01 | — | — | 🚧 | ⏳ | 🚧 Em andamento |
-| Integrar Linux ao Active Directory | — | — | ⏳ | ⏳ | ⏳ Pendente |
-| Validar autenticação de usuário AD no Linux | — | — | ⏳ | ⏳ | ⏳ Pendente |
-
----
 
 ## Agradecimentos
 
