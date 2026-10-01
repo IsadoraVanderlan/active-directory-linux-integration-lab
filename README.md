@@ -4,15 +4,15 @@
 
 Laboratório prático de **Gestão de Identidades e Acessos (IAM)** em ambiente multiplataforma, utilizando o **Active Directory** como serviço central de identidade e grupos como principal mecanismo de autorização.
 
-O projeto demonstra autenticação centralizada, controle de acesso baseado em grupos, separação entre usuários comuns e privilegiados, integração Windows/Linux, concessão e revogação de acessos e aplicação do princípio de **Least Privilege**.
+O ambiente demonstra **autenticação centralizada, controle de acesso baseado em grupos, separação entre usuários comuns e privilegiados, grupos aninhados, integração Windows/Linux, concessão e revogação de acessos e Least Privilege**.
 
 ---
 
-## 🧭 Ambiente
+## 🧭 Visão Geral
 
 | Host | Sistema | Papel | IP |
 | :--- | :--- | :--- | :--- |
-| `DC01` | Windows Server | Active Directory / DNS | `10.10.10.2` |
+| `DC01` | Windows Server | Domain Controller / AD / DNS | `10.10.10.2` |
 | `CLI01` | Windows 11 Pro | Estação cliente | `10.10.10.10` |
 | `DEBIAN01` | Debian | Servidor Linux | `10.10.10.30` |
 | `ROCKY01` | Rocky Linux 9.8 | Servidor Linux | `10.10.10.40` |
@@ -22,8 +22,9 @@ O projeto demonstra autenticação centralizada, controle de acesso baseado em g
 ### Arquitetura
 
 ```mermaid
-flowchart LR
-    DC["🔐 DC01<br/>Windows Server<br/>Active Directory + DNS"]
+flowchart TB
+
+    DC["🔐 DC01<br/>Windows Server<br/>Active Directory + DNS<br/>10.10.10.2"]
 
     CLI["💻 CLI01<br/>Windows 11<br/>10.10.10.10"]
     DEB["🐧 DEBIAN01<br/>Debian<br/>10.10.10.30"]
@@ -34,82 +35,100 @@ flowchart LR
     DC --> ROCKY
 ```
 
-O `DC01` centraliza as identidades e os serviços do domínio. O `CLI01` representa uma estação corporativa Windows, enquanto `DEBIAN01` e `ROCKY01` representam servidores Linux cujos acessos são controlados através de identidades e grupos.
+O `DC01` centraliza as identidades e os serviços do domínio. O `CLI01` representa uma estação corporativa Windows, enquanto `DEBIAN01` e `ROCKY01` representam servidores Linux com acesso controlado por identidades e grupos.
 
 ---
 
-# 🏢 Active Directory
+# 🏢 DC01 — Windows Server
 
-O **Active Directory Domain Services (AD DS)** foi implementado no `DC01` como serviço central de identidade do ambiente.
+> **Domain Controller · Active Directory · DNS · Kerberos · GPO**
 
-`DC01` → `AD DS` · `DNS` · `Kerberos` · `lab.local`
+O `DC01` atua como núcleo de identidade do laboratório, centralizando **usuários, grupos, autenticação, políticas e serviços de domínio**.
 
-### Estrutura
+**IP:** `10.10.10.2/24` · **Domínio:** `lab.local` · **DNS:** `10.10.10.2`
 
-| Componente | Implementação |
-| :--- | :--- |
-| Domain Controller | `DC01` |
-| Domínio / Forest | `lab.local` |
-| DNS interno | `10.10.10.2` |
-| Organização | Organizational Units (OUs) |
-| Identidades | Usuários do domínio |
-| Autorização | Grupos de segurança |
-| Políticas | Group Policy Objects |
-| Autenticação | Kerberos |
+---
+
+## Active Directory e DNS
+
+O servidor foi promovido a **Domain Controller** da floresta `lab.local` com os serviços **Active Directory Domain Services (AD DS)** e **DNS**.
+
+```text
+DC01
+ │
+ ├── Active Directory
+ ├── DNS
+ ├── Kerberos
+ ├── Usuários
+ ├── Grupos
+ ├── OUs
+ └── GPOs
+```
+
+O DNS interno permite que os demais hosts localizem o domínio e seus serviços.
+
+A sincronização de horário foi configurada entre os sistemas do ambiente para manter consistência temporal durante a autenticação.
 
 <details>
-<summary><b>⚙️ Configuração do Domain Controller</b></summary>
+<summary><b>⚙️ Configuração principal</b></summary>
 
 <br>
 
-O servidor `DC01` foi configurado com endereço:
-
 ```text
-10.10.10.2/24
+Hostname: DC01
+IPv4:    10.10.10.2/24
+Domínio: lab.local
+DNS:     10.10.10.2
 ```
 
-e promovido a **Domain Controller** da floresta:
+**Funções**
 
-```text
-lab.local
-```
-
-O serviço DNS foi instalado juntamente com o Active Directory e utilizado pelos demais hosts para localização dos serviços do domínio.
-
-A sincronização de horário também foi configurada e validada entre os sistemas participantes do ambiente.
+- Active Directory Domain Services
+- DNS Server
 
 </details>
 
 ---
 
-## Organização de identidades
+## OUs, usuários e grupos
 
-Os objetos foram organizados em **OUs**, permitindo separar identidades, computadores e aplicação de políticas.
+Os objetos do Active Directory foram organizados através de **Organizational Units (OUs)** e grupos de segurança.
 
-### Usuários e grupos
-
-```text
-admin.lab ──────► GG-IT-Admins
-                     │
-                     └── Perfil privilegiado
-
-user.lab ───────► GG-IT-Users
-                     │
-                     └── Perfil comum
+```mermaid
+flowchart LR
+    U["👤 Usuário"] --> GF["👥 Grupo"]
+    GF --> P["🔑 Permissão"]
+    P --> R["🖥️ Recurso"]
 ```
 
-| Identidade | Grupo | Perfil |
-| :--- | :--- | :--- |
-| `admin.lab` | `GG-IT-Admins` | Privilegiado |
-| `user.lab` | `GG-IT-Users` | Comum |
+A atribuição de permissões através de grupos reduz concessões individuais e centraliza a administração dos acessos.
 
-As permissões foram atribuídas preferencialmente aos **grupos**, evitando concessões individuais diretamente às identidades.
+<details>
+<summary><b>👥 Ver estrutura de identidades e grupos</b></summary>
+
+<br>
+
+Os usuários utilizados no laboratório foram associados aos respectivos grupos de acordo com o perfil de acesso.
+
+```text
+Usuário comum
+    │
+    └── Grupo comum
+
+Usuário privilegiado
+    │
+    └── Grupo administrativo
+```
+
+Os nomes dos objetos correspondem à estrutura efetivamente criada no Active Directory.
+
+</details>
 
 ---
 
 ## Grupos aninhados
 
-Foi utilizado um cenário de **Nested Groups** para separar a função exercida pelo usuário da permissão concedida ao recurso.
+Foi configurado um cenário de **Nested Groups**, separando o grupo relacionado à função do usuário do grupo responsável pela concessão do acesso.
 
 ```mermaid
 flowchart LR
@@ -119,20 +138,20 @@ flowchart LR
     P --> R["Recurso"]
 ```
 
-Esse modelo permite que uma identidade receba acesso indiretamente através da associação entre grupos.
+Esse modelo permite que o acesso seja concedido indiretamente através da associação entre grupos.
 
 ---
 
 ## Group Policy — GPO
 
-A `GPO-IT-Baseline` foi aplicada aos objetos correspondentes para centralizar políticas de segurança no ambiente Windows.
+As políticas do ambiente Windows foram centralizadas através de **Group Policy Objects**.
 
-**Controles aplicados**
+A GPO de segurança foi aplicada à OU correspondente e utilizada para configurar controles como:
 
 `Senha` · `Bloqueio de conta` · `Bloqueio por inatividade`
 
 <details>
-<summary><b>⚙️ Comandos de aplicação e validação</b></summary>
+<summary><b>⚙️ Aplicação e validação da GPO</b></summary>
 
 <br>
 
@@ -142,78 +161,103 @@ gpresult /r
 gpresult /h C:\gpresult.html /f
 ```
 
-- `gpupdate /force` — força a atualização das políticas.
-- `gpresult /r` — exibe as políticas aplicadas.
-- `gpresult /h` — gera um relatório detalhado em HTML.
+**Função dos comandos**
+
+`gpupdate /force` → força a atualização das políticas.
+
+`gpresult /r` → exibe as políticas aplicadas.
+
+`gpresult /h` → gera um relatório detalhado das políticas.
 
 </details>
 
 ---
 
-# 💻 Windows Client — CLI01
+# 💻 CLI01 — Windows 11
 
-O `CLI01` representa uma estação corporativa Windows integrada ao domínio.
+> **Windows Client · Domain Member · GPO**
 
-**Windows 11 Pro** · `10.10.10.10/24` · DNS `10.10.10.2` · `lab.local`
+O `CLI01` representa uma **estação corporativa Windows** utilizada para validar autenticação no domínio e aplicação das políticas centralizadas.
+
+**IP:** `10.10.10.10/24` · **DNS:** `10.10.10.2` · **Domínio:** `lab.local`
 
 ```text
 CLI01
   │
-  ├── DNS → DC01
-  │
-  ├── Domínio → lab.local
-  │
-  ├── Autenticação → Active Directory
-  │
-  └── Políticas → GPO
+  ├── DNS ──────────► DC01
+  ├── Domínio ──────► lab.local
+  ├── Autenticação ─► Active Directory
+  └── Políticas ────► GPO
 ```
 
-O ingresso no domínio permite autenticação através das identidades centralizadas e aplicação das políticas definidas no Active Directory.
+---
+
+## Ingresso no domínio
+
+O DNS da estação foi configurado para apontar para o `DC01`, permitindo a localização do domínio `lab.local`.
+
+Após o ingresso, o computador passou a ser reconhecido como membro do domínio.
 
 <details>
-<summary><b>🔎 Validação técnica</b></summary>
+<summary><b>🔎 Validação da estação</b></summary>
 
 <br>
 
 ```powershell
 whoami
 ipconfig /all
-gpresult /r
 ```
 
-A aplicação da `GPO-IT-Baseline` foi validada diretamente no `CLI01`.
+Esses comandos permitem validar a identidade utilizada e as configurações de rede/DNS da estação.
 
 </details>
 
 ---
 
-# 🐧 Linux Servers
+## Aplicação das políticas
 
-Os servidores Debian e Rocky Linux foram utilizados para demonstrar **controle de acesso local** e posteriormente **controle centralizado através do Active Directory**.
+As políticas configuradas no Active Directory foram aplicadas e validadas no `CLI01`.
 
-Inicialmente, o modelo local utilizado foi:
+<details>
+<summary><b>🛡️ Validação das GPOs</b></summary>
 
-```text
-linuxadmin ──► linux-admins ──► SUDO
+<br>
 
-linuxuser  ──► linux-users  ──► acesso padrão
+```powershell
+gpupdate /force
+gpresult /r
 ```
 
-O privilégio administrativo é atribuído ao **grupo**, e não diretamente à identidade.
+O resultado confirma as políticas recebidas pela estação através do domínio.
+
+</details>
 
 ---
 
-## Debian — DEBIAN01
+# 🐧 DEBIAN01 — Debian
 
-**Debian** · `10.10.10.30/24` · DNS `10.10.10.2` · `lab.local`
+> **Linux Server · Local Access · Active Directory · SSSD**
 
-### Controle de acesso local
+O `DEBIAN01` representa um servidor Linux corporativo integrado ao domínio `lab.local`.
 
-`linuxadmin` → `linux-admins` → **sudo permitido**  
-`linuxuser` → `linux-users` → **sudo negado**
+O servidor utiliza **grupos locais e grupos do Active Directory** para diferenciar usuários comuns, usuários autorizados e usuários privilegiados.
+
+**IP:** `10.10.10.30/24` · **DNS:** `10.10.10.2` · **Domínio:** `lab.local`
+
+---
+
+## Rede e comunicação com o DC01
+
+```mermaid
+flowchart LR
+    DEB["🐧 DEBIAN01<br/>10.10.10.30"] --> DNS["DNS<br/>10.10.10.2"]
+    DNS --> DC["🔐 DC01<br/>lab.local"]
+```
+
+O servidor utiliza o `DC01` como DNS interno e consegue localizar o domínio.
 
 <details>
-<summary><b>⚙️ Rede e validação DNS</b></summary>
+<summary><b>⚙️ Validação de rede e DNS</b></summary>
 
 <br>
 
@@ -224,12 +268,22 @@ ping -c 4 10.10.10.2
 nslookup lab.local 10.10.10.2
 ```
 
-O servidor utiliza `10.10.10.2` como DNS interno para resolução do domínio `lab.local`.
-
 </details>
 
+---
+
+## Usuários e grupos locais
+
+O acesso local foi separado entre um perfil administrativo e um perfil comum.
+
+```text
+linuxadmin ─────► linux-admins ─────► SUDO
+
+linuxuser ──────► linux-users ──────► acesso padrão
+```
+
 <details>
-<summary><b>👥 Criação dos usuários e grupos locais</b></summary>
+<summary><b>👥 Criação e validação das identidades locais</b></summary>
 
 <br>
 
@@ -256,41 +310,130 @@ id linuxuser
 
 </details>
 
-<details>
-<summary><b>🛡️ Configuração do sudo</b></summary>
+---
 
-<br>
+## Sudo baseado em grupo local
 
-O grupo administrativo recebeu privilégio através do `sudoers`:
+O privilégio administrativo foi atribuído ao grupo `linux-admins`, e não diretamente ao usuário.
 
 ```text
 %linux-admins ALL=(ALL:ALL) ALL
 ```
 
-Resultado:
+| Perfil | Grupo | Sudo |
+| :--- | :--- | :---: |
+| Administrativo | `linux-admins` | ✅ |
+| Comum | `linux-users` | ❌ |
+
+<details>
+<summary><b>🛡️ Validação do privilégio</b></summary>
+
+<br>
+
+O teste foi realizado com os dois perfis para confirmar:
 
 ```text
-linuxadmin → linux-admins → sudo permitido
-linuxuser  → linux-users  → sudo negado
+linuxadmin → operação administrativa permitida
+linuxuser  → operação administrativa negada
 ```
 
 </details>
 
 ---
 
-## Rocky Linux — ROCKY01
+## Integração com o Active Directory
 
-**Rocky Linux 9.8** · `10.10.10.40/24` · DNS `10.10.10.2` · `lab.local`
+A integração do `DEBIAN01` com o `DC01` foi realizada utilizando **realmd, SSSD e Kerberos**.
 
-### Controle de acesso local
-
-`linuxadmin` → `linux-admins` → **sudo permitido**  
-`linuxuser` → `linux-users` → **sudo negado**
+```mermaid
+flowchart LR
+    DEB["🐧 DEBIAN01"] --> REALM["realmd"]
+    REALM --> SSSD["SSSD"]
+    SSSD --> AD["🔐 Active Directory<br/>DC01"]
+```
 
 <details>
-<summary><b>⚙️ Rede e DNS</b></summary>
+<summary><b>⚙️ Ingresso no domínio</b></summary>
 
 <br>
+
+**Descoberta do domínio**
+
+```bash
+realm discover lab.local
+```
+
+**Ingresso**
+
+```bash
+sudo realm join lab.local -U Administrator
+```
+
+**Validação**
+
+```bash
+realm list
+systemctl status sssd
+```
+
+</details>
+
+---
+
+## Identidades e grupos do AD
+
+Após a integração, o servidor passou a reconhecer identidades provenientes do Active Directory.
+
+<details>
+<summary><b>🔎 Validação das identidades do domínio</b></summary>
+
+<br>
+
+```bash
+id usuario@lab.local
+```
+
+O retorno apresenta a identidade e os grupos do Active Directory reconhecidos pelo Linux através do SSSD.
+
+</details>
+
+---
+
+## Controle de acesso através do AD
+
+O acesso ao `DEBIAN01` foi condicionado à associação do usuário aos grupos autorizados no Active Directory.
+
+```mermaid
+flowchart LR
+    U["👤 Usuário AD"] --> G{"Grupo autorizado?"}
+    G -->|Sim| LOGIN["✅ Login"]
+    G -->|Não| DENY["⛔ Negado"]
+    LOGIN --> P{"Grupo privilegiado?"}
+    P -->|Sim| SUDO["🛡️ Sudo"]
+    P -->|Não| COMMON["Acesso comum"]
+```
+
+Assim, a identidade pode existir e autenticar no domínio sem necessariamente possuir autorização para acessar o servidor.
+
+---
+
+# 🐧 ROCKY01 — Rocky Linux
+
+> **Linux Server · Local Access · Active Directory · SSSD**
+
+O `ROCKY01` representa o segundo servidor Linux do ambiente, utilizado para validar o mesmo modelo de Gestão de Acessos em uma distribuição diferente.
+
+**IP:** `10.10.10.40/24` · **DNS:** `10.10.10.2` · **Domínio:** `lab.local`
+
+---
+
+## Rede e comunicação com o DC01
+
+```mermaid
+flowchart LR
+    ROCKY["🐧 ROCKY01<br/>10.10.10.40"] --> DNS["DNS<br/>10.10.10.2"]
+    DNS --> DC["🔐 DC01<br/>lab.local"]
+```
 
 A interface interna foi configurada com:
 
@@ -299,6 +442,11 @@ IP:     10.10.10.40/24
 DNS:    10.10.10.2
 Search: lab.local
 ```
+
+<details>
+<summary><b>⚙️ Validação de rede e DNS</b></summary>
+
+<br>
 
 **Comunicação com o DC**
 
@@ -314,7 +462,7 @@ Resultado:
 0% packet loss
 ```
 
-**Resolução do domínio**
+**Resolução DNS**
 
 ```bash
 nslookup lab.local 10.10.10.2
@@ -332,8 +480,18 @@ Address: 10.10.10.2
 
 </details>
 
+---
+
+## Usuários e grupos locais
+
+```text
+linuxadmin ─────► linux-admins ─────► SUDO
+
+linuxuser ──────► linux-users ──────► acesso padrão
+```
+
 <details>
-<summary><b>👥 Criação dos usuários e grupos locais</b></summary>
+<summary><b>👥 Criação e validação das identidades locais</b></summary>
 
 <br>
 
@@ -358,72 +516,52 @@ id linuxadmin
 id linuxuser
 ```
 
-Estrutura:
-
-```text
-linuxadmin
-    └── linux-admins
-
-linuxuser
-    └── linux-users
-```
-
 </details>
 
-<details>
-<summary><b>🛡️ Configuração do sudo</b></summary>
+---
 
-<br>
+## Sudo baseado em grupo local
 
-O grupo `linux-admins` recebeu privilégio administrativo:
+O grupo `linux-admins` recebeu o privilégio administrativo.
 
 ```text
 %linux-admins ALL=(ALL) ALL
 ```
 
-A diferença de acesso foi validada utilizando os dois perfis:
+| Perfil | Grupo | Sudo |
+| :--- | :--- | :---: |
+| Administrativo | `linux-admins` | ✅ |
+| Comum | `linux-users` | ❌ |
+
+<details>
+<summary><b>🛡️ Validação do privilégio</b></summary>
+
+<br>
 
 ```text
 linuxadmin → operação administrativa permitida
 linuxuser  → operação administrativa negada
 ```
 
-</details>
+A diferença de privilégio é determinada pela associação ao grupo.
 
-</br>
+</details>
 
 ---
 
-# 🔗 Active Directory + Linux
+## Integração com o Active Directory
 
-Os servidores Linux foram integrados ao domínio `lab.local` utilizando **realmd, SSSD e Kerberos**.
+O `ROCKY01` foi associado ao domínio `lab.local` utilizando `realmd`, SSSD e Kerberos.
 
 ```mermaid
 flowchart LR
-    USER["👤 Usuário AD"]
-    AD["🔐 Active Directory"]
-    K["Kerberos"]
-    S["SSSD"]
-    L["🐧 Linux"]
-
-    USER --> AD
-    AD --> K
-    K --> S
-    S --> L
+    ROCKY["🐧 ROCKY01"] --> REALM["realmd"]
+    REALM --> SSSD["SSSD"]
+    SSSD --> AD["🔐 Active Directory<br/>DC01"]
 ```
 
-### Componentes
-
-| Componente | Papel |
-| :--- | :--- |
-| Active Directory | Fonte central de identidades e grupos |
-| DNS | Localização do domínio e serviços |
-| Kerberos | Autenticação |
-| `realmd` | Descoberta e ingresso no domínio |
-| SSSD | Identidades, grupos e autenticação no Linux |
-
 <details>
-<summary><b>⚙️ Ingresso dos servidores no domínio</b></summary>
+<summary><b>⚙️ Ingresso e validação do domínio</b></summary>
 
 <br>
 
@@ -449,140 +587,95 @@ systemctl status sssd
 **Consulta de identidade**
 
 ```bash
-id Administrator@lab.local
+id usuario@lab.local
 ```
-
-O retorno da identidade confirma que os servidores Linux conseguem consultar usuários e grupos provenientes do Active Directory.
 
 </details>
 
 ---
 
-## Autenticação e autorização
+## Controle de acesso através do AD
 
-A integração separa duas decisões:
+O acesso ao servidor e a elevação administrativa foram separados em dois níveis:
 
 ```text
-AUTENTICAÇÃO
-Quem é o usuário?
-        │
-        ▼
-Active Directory
-
-
-AUTORIZAÇÃO
-O que esse usuário pode acessar?
-        │
-        ▼
-Grupos + políticas
+Identidade AD
+      │
+      ▼
+Grupo autorizado
+      │
+      ▼
+LOGIN
+      │
+      ▼
+Grupo privilegiado?
+   ┌──┴──┐
+   │     │
+  NÃO   SIM
+   │     │
+   ▼     ▼
+ COMUM  SUDO
 ```
 
-O usuário pode possuir uma identidade válida no domínio e, ainda assim, **não possuir autorização para acessar determinado servidor**.
+Dessa forma, possuir uma identidade válida no domínio não implica automaticamente possuir acesso administrativo ao servidor.
 
 ---
 
-## Acesso Linux baseado em grupos do AD
+# 🔑 Testes de Gestão de Acessos
 
-O acesso aos servidores foi controlado através das associações aos grupos do Active Directory.
+Após a configuração dos hosts, foram executados testes envolvendo o ambiente integrado para validar **autenticação, autorização, concessão, alteração e revogação de acessos**.
+
+---
+
+## Usuário comum x privilegiado
+
+| Cenário | Usuário comum | Usuário privilegiado |
+| :--- | :---: | :---: |
+| Autenticação no domínio | ✅ | ✅ |
+| Login autorizado | ✅ | ✅ |
+| Operações padrão | ✅ | ✅ |
+| `sudo` | ❌ | ✅ |
+| Administração | ❌ | ✅ |
+
+A diferença de acesso é determinada pelos grupos associados à identidade.
+
+---
+
+## Concessão de acesso
 
 ```mermaid
 flowchart LR
-    U["👤 Usuário AD"] --> G{"Grupo autorizado?"}
-    G -->|Sim| LOGIN["✅ Login permitido"]
-    G -->|Não| DENY["⛔ Acesso negado"]
-
-    LOGIN --> P{"Grupo privilegiado?"}
-    P -->|Sim| SUDO["🛡️ Sudo permitido"]
-    P -->|Não| COMMON["👤 Acesso comum"]
+    U["👤 Usuário"] --> G["Adicionado ao grupo"]
+    G --> P["Permissão herdada"]
+    P --> A["✅ Acesso concedido"]
 ```
 
-Isso permite controlar separadamente:
-
-**Identidade** → **Acesso ao servidor** → **Privilégio administrativo**
+A concessão foi realizada através da associação do usuário ao grupo responsável pelo acesso.
 
 ---
 
-# 🔑 Gestão de Acessos
-
-A associação a grupos foi utilizada como principal mecanismo para administrar o ciclo de vida dos acessos.
-
-### Ciclo de vida
+## Revogação de acesso
 
 ```mermaid
 flowchart LR
-    U["👤 Usuário"] --> C["Concessão"]
-    C --> A["Acesso"]
-    A --> M["Alteração"]
-    M --> R["Revogação"]
+    U["👤 Usuário"] --> G["Removido do grupo"]
+    G --> P["Permissão removida"]
+    P --> A["⛔ Acesso revogado"]
 ```
 
-### Concessão
-
-`Usuário` → `Adicionado ao grupo` → `Permissão herdada` → **Acesso concedido**
-
-### Alteração
-
-`Usuário` → `Mudança de grupo` → `Novo nível de privilégio`
-
-### Revogação
-
-`Usuário` → `Removido do grupo` → `Permissão removida` → **Acesso revogado**
-
-### Desativação
-
-`Conta desabilitada no AD` → **Autenticação bloqueada**
-
----
-
-## Validação dos níveis de acesso
-
-| Cenário | Autenticação | Login Linux | Sudo |
-| :--- | :---: | :---: | :---: |
-| Usuário comum autorizado | ✅ | ✅ | ❌ |
-| Usuário privilegiado | ✅ | ✅ | ✅ |
-| Usuário sem grupo autorizado | ✅ | ❌ | — |
-| Conta desabilitada | ❌ | ❌ | — |
-
-A diferença entre os perfis é determinada pela **associação aos grupos**, sem necessidade de atribuir permissões diretamente a cada identidade.
-
----
-
-## Concessão e revogação
-
-O mesmo usuário foi utilizado para demonstrar a alteração dinâmica do acesso:
-
-```text
-                 USUÁRIO
-                    │
-          ┌─────────┴─────────┐
-          │                   │
-    ADICIONADO            REMOVIDO
-     DO GRUPO              DO GRUPO
-          │                   │
-          ▼                   ▼
-       ACESSO              ACESSO
-      CONCEDIDO            REVOGADO
-```
-
-Essa abordagem simplifica o gerenciamento e reduz permissões individuais espalhadas pelos recursos.
+A revogação foi realizada removendo a associação ao grupo, sem alteração direta das permissões da identidade.
 
 ---
 
 ## Conta desabilitada
 
-A desativação da identidade no Active Directory interrompe a autenticação nos recursos integrados.
+O comportamento de uma identidade desabilitada no Active Directory também foi validado.
 
 ```text
 Conta habilitada
       │
       ▼
-Autenticação
-      │
-      ▼
-Grupos
-      │
-      ▼
-Autorização
+Autenticação permitida
 
 
 Conta desabilitada
@@ -591,17 +684,34 @@ Conta desabilitada
 Autenticação bloqueada
 ```
 
+A desativação centralizada impede que a identidade continue autenticando nos recursos integrados.
+
 ---
 
-# 🛡️ Least Privilege
+## Impacto dos grupos aninhados
 
-O modelo de autorização foi estruturado segundo o princípio de **Least Privilege**: cada identidade recebe somente os acessos necessários para exercer sua função.
+O acesso também foi validado através de associação indireta:
+
+```mermaid
+flowchart LR
+    U["👤 Usuário"] --> GF["Grupo de Função"]
+    GF --> GA["Grupo de Acesso"]
+    GA --> R["🖥️ Recurso"]
+```
+
+A remoção da associação correspondente altera o acesso herdado pela identidade.
+
+---
+
+# 🛡️ Segurança e Least Privilege
+
+O ambiente foi estruturado segundo o princípio de **Least Privilege**, concedendo a cada identidade somente os acessos necessários para sua função.
 
 ```mermaid
 flowchart LR
     I["👤 Identidade"] --> F["Função"]
     F --> G["Grupo"]
-    G --> P["Permissão necessária"]
+    G --> P["Permissão"]
     P --> R["Recurso"]
 ```
 
@@ -609,61 +719,34 @@ flowchart LR
 
 | Controle | Implementação |
 | :--- | :--- |
-| Identidade | Centralizada no Active Directory |
+| Identidades | Centralizadas no Active Directory |
 | Autorização | Baseada em grupos |
-| Usuário comum | Sem privilégio administrativo |
+| Usuários comuns | Sem privilégio administrativo |
 | Administração | Grupos privilegiados dedicados |
 | Linux | Active Directory + SSSD |
-| Concessão | Inclusão no grupo |
+| Concessão | Inclusão em grupo |
 | Alteração | Mudança de associação |
 | Revogação | Remoção do grupo |
 | Desativação | Conta desabilitada no AD |
 | Windows | Políticas centralizadas via GPO |
 | Princípio | Least Privilege |
 
-A utilização de grupos reduz concessões individuais, simplifica auditoria e torna a administração do ciclo de vida dos acessos mais consistente.
-
 ---
 
-# 🎬 Evidências
+# 🎬 Demonstração Técnica
 
-As evidências foram concentradas nas operações relevantes à **Gestão de Identidades e Acessos**, evitando vídeos extensos de instalação de sistemas operacionais ou pacotes.
+As evidências foram concentradas nos controles relevantes à **Gestão de Identidades e Acessos**, evitando demonstrações extensas de instalação de sistemas operacionais e pacotes.
 
-```text
-Active Directory
-      │
-      ├── OUs
-      ├── Usuários
-      ├── Grupos
-      └── Grupos aninhados
-             │
-             ▼
-       Windows / Linux
-             │
-      ┌──────┴──────┐
-      │             │
- Autenticação   Autorização
-      │             │
-      └──────┬──────┘
-             ▼
-       Testes de acesso
-```
+### O vídeo final demonstra
 
-### Demonstração técnica
-
-O vídeo final apresenta:
-
-- estrutura de OUs, usuários e grupos no Active Directory;
-- associações e grupos aninhados;
-- aplicação das políticas no Windows;
-- reconhecimento das identidades do AD nos servidores Linux;
-- autenticação com usuário do domínio;
-- usuário autorizado x não autorizado;
-- usuário comum x privilegiado;
-- `sudo` baseado em grupo;
-- concessão de acesso por associação ao grupo;
-- revogação por remoção do grupo;
-- comportamento de uma conta desabilitada.
+`Active Directory` → OUs, usuários, grupos e grupos aninhados  
+`Windows` → autenticação e aplicação das GPOs  
+`Linux` → reconhecimento das identidades e grupos do AD  
+`Autorização` → acesso permitido x acesso negado  
+`Privilégio` → usuário comum x privilegiado  
+`Concessão` → inclusão no grupo e obtenção do acesso  
+`Revogação` → remoção do grupo e perda do acesso  
+`Desativação` → bloqueio da autenticação
 
 ![Demonstração Técnica](./Videos/demonstracao-final.gif)
 
@@ -673,34 +756,26 @@ O vídeo final apresenta:
 
 ```mermaid
 flowchart TD
-    USER["👤 Usuário"]
-    AUTH["🔐 Autenticação"]
-    AD["Active Directory"]
-    ENABLED{"Conta habilitada?"}
-    GROUP{"Grupo autorizado?"}
-    ACCESS["✅ Acesso permitido"]
-    DENY["⛔ Acesso negado"]
-    PRIV{"Grupo privilegiado?"}
-    COMMON["👤 Acesso comum"]
-    SUDO["🛡️ Sudo"]
+    USER["👤 Usuário"] --> AUTH["Autenticação"]
+    AUTH --> AD["🔐 Active Directory"]
 
-    USER --> AUTH
-    AUTH --> AD
-    AD --> ENABLED
+    AD --> ENABLED{"Conta habilitada?"}
 
-    ENABLED -->|Não| DENY
-    ENABLED -->|Sim| GROUP
+    ENABLED -->|Não| DENY["⛔ Acesso negado"]
+    ENABLED -->|Sim| GROUP{"Grupo autorizado?"}
 
     GROUP -->|Não| DENY
-    GROUP -->|Sim| ACCESS
+    GROUP -->|Sim| ACCESS["✅ Acesso permitido"]
 
-    ACCESS --> PRIV
+    ACCESS --> PRIV{"Grupo privilegiado?"}
 
-    PRIV -->|Não| COMMON
-    PRIV -->|Sim| SUDO
+    PRIV -->|Não| COMMON["👤 Acesso comum"]
+    PRIV -->|Sim| SUDO["🛡️ Sudo"]
 ```
 
-O fluxo demonstra a separação entre **identidade, autenticação, autorização e privilégio** utilizada durante todo o laboratório.
+O fluxo representa a lógica utilizada no laboratório:
+
+**Identidade → Autenticação → Grupo → Autorização → Privilégio → Recurso**
 
 ---
 
@@ -709,4 +784,4 @@ O fluxo demonstra a separação entre **identidade, autenticação, autorizaçã
 Agradecimento especial a **Edson Bezerra**  
 *Manager, LATAM Cyber Security Infrastructure Services — DXC Technology*
 
-pela mentoria, direcionamento técnico e proposta do laboratório utilizado como base para o desenvolvimento deste projeto.
+pela mentoria, direcionamento técnico e proposta utilizada como base para o desenvolvimento deste laboratório.
