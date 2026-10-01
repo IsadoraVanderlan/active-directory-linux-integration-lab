@@ -390,6 +390,8 @@ linuxuser  → operação administrativa negada
 
 </details>
 
+</br>
+
 ---
 
 # 🔗 Active Directory + Linux
