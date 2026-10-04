@@ -90,24 +90,13 @@ Durante a apresentação devem ser explicados:
 
 ---
 
-# 🗺️ Arquitetura do Laboratório
+# 🗺️ Diagrama de Arquitetura e Fluxo de Gestão de Acessos
 
 O `DC01` funciona como núcleo de identidade do ambiente.
 
-```text
-                         ┌─────────────────────┐
-                         │        DC01         │
-                         │ Active Directory    │
-                         │ DNS / Kerberos/NTP  │
-                         │     lab.local       │
-                         └──────────┬──────────┘
-                                    │
-                 ┌──────────────────┼───────────────────┐
-                 │                  │                   │
-                 ▼                  ▼                   ▼
-              CLI01             DEBIAN01            ROCKY01
-           Windows 11            Debian             Rocky Linux
-           Domínio/GPO          SSSD/AD             SSSD/AD
+
+![Diagrama de Arquitetura e Fluxo de Gestão de Acessos](./Fluxogama%20de%20gestão%20de%20acesso.png)
+
 ```
 
 O Active Directory centraliza:
