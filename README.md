@@ -20,7 +20,7 @@ O projeto demonstra conceitos de:
 
 # 📋 Proposta do Projeto
 
-A proposta do projeto apresentada pelo gerente **Edson** foi construir um laboratório capaz de demonstrar os principais conceitos de **Gestão de Identidades e Acessos** em ambientes Windows e Linux.
+A proposta do projeto apresentada pelo gerente **Edson Bezerra** foi construir um laboratório capaz de demonstrar os principais conceitos de **Gestão de Identidades e Acessos** em ambientes Windows e Linux.
 
 ## 1. Active Directory / Windows
 
