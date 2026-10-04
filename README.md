@@ -94,8 +94,6 @@ Durante a apresentação devem ser explicados:
 
 O `DC01` funciona como núcleo de identidade do ambiente.
 
-
-![Diagrama de Arquitetura e Fluxo de Gestão de Acessos](./IAM%20Access%20Management%20(1).pdf)
 ![Diagrama de Arquitetura e Fluxo de Gestão de Acessos](./IAM%20Access%20Management.jpg)
 ```
 
