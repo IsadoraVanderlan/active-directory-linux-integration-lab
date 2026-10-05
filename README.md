@@ -114,7 +114,7 @@ O Active Directory centraliza:
 > Exportar o fluxograma criado no Miro para a pasta `docs` e ajustar o nome do arquivo abaixo, se necessário.
 
 ```markdown
-![Fluxograma IAM](./docs/fluxograma-iam.png)
+![Fluxograma IAM](./IAM%20Access%20Management.jpg)
 ```
 
 ---
