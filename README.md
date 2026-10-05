@@ -94,10 +94,9 @@ Durante a apresentação devem ser explicados:
 
 O `DC01` funciona como núcleo de identidade do ambiente.
 
-![Diagrama de Arquitetura e Fluxo de Gestão de Acessos](./Access%20Management.jpg)
+![Diagrama de Arquitetura e Fluxo de Gestão de Acessos](./IAM%20Access%20Management.jpg)
 
 ```
-
 O Active Directory centraliza:
 
 - usuários;
@@ -106,15 +105,6 @@ O Active Directory centraliza:
 - autenticação;
 - políticas;
 - relações de associação entre grupos.
-
----
-
-## Fluxograma do Projeto
-
-> Exportar o fluxograma criado no Miro para a pasta `docs` e ajustar o nome do arquivo abaixo, se necessário.
-
-```markdown
-![Fluxograma IAM](./IAM%20Access%20Management.jpg)
 ```
 
 ---
