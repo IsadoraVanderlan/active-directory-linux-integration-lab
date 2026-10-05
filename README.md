@@ -10,6 +10,7 @@ O projeto demonstra, de forma prática, **identidade centralizada, autenticaçã
 
 <br/>
 <br>
+
 ---
 
 ## 📋 Proposta do Projeto
