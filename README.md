@@ -8,7 +8,8 @@ O projeto demonstra, de forma prática, **identidade centralizada, autenticaçã
 
 > **Modelo central do projeto:** `Identidade → Função → Permissão → Recurso`
 
-----
+<br/>
+<br>
 ---
 
 ## 📋 Proposta do Projeto
