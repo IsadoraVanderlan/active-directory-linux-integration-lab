@@ -84,7 +84,7 @@ Durante a apresentação devem ser explicados:
 
 ## 🗺️ Arquitetura e Ambiente Integrado
 
-Visão do ambiente utilizado para centralizar identidades no Active Directory e integrar estações Windows e servidores Linux ao domínio `lab.local`.
+> **Visão do ambiente utilizado para centralizar identidades no Active Directory e integrar estações Windows e servidores Linux ao domínio `lab.local`.**
 
 ![Diagrama de Arquitetura e Fluxo de Gestão de Acessos](./IAM%20Access%20Management.jpg)
 
@@ -295,7 +295,7 @@ Após essa separação, o sudo foi novamente testado no Debian e no Rocky para c
 
 ## 💻 Windows no Domínio
 
-Demonstra o ingresso do `CLI01` no domínio e a aplicação centralizada de políticas através de GPO.
+> **Demonstra o ingresso do `CLI01` no domínio e a aplicação centralizada de políticas através de GPO.**
 
 <details>
 <summary><b>Ver configuração e validações do Windows</b></summary>
@@ -585,7 +585,7 @@ Esse comportamento foi observado principalmente durante os testes de concessão 
 
 ## 🔄 Ciclo de Vida da Identidade e do Acesso
 
-Demonstra a diferença entre usuário comum e privilegiado e acompanha o acesso desde o estado inicial até concessão, revogação, desabilitação e reabilitação da identidade.
+> **Demonstra a diferença entre usuário comum e privilegiado e acompanha o acesso desde o estado inicial até concessão, revogação, desabilitação e reabilitação da identidade.**
 
 <details>
 <summary>🔄 <b>Ver testes de concessão, revogação e estado da conta</b></summary>
@@ -820,7 +820,7 @@ Autenticação restaurada
 
 ## 🛡️ Controles de Segurança e Riscos
 
-Reúne os princípios de segurança aplicados no laboratório, os riscos identificados, as respectivas mitigações e o status do controle de login/SSH por grupo.
+> **Reúne os princípios de segurança aplicados no laboratório, os riscos identificados, as respectivas mitigações e o status do controle de login/SSH por grupo.**
 
 <details>
 <summary><b>Ver controles IAM, riscos e mitigações</b></summary>
@@ -918,7 +918,7 @@ Por esse motivo, o README não considera esse controle como concluído neste mom
 
 ## 🎬 Demonstração Técnica e Estado Final
 
-Consolida o roteiro de apresentação, as evidências que devem ser demonstradas e o estado final dos componentes e controles implementados.
+> **Consolida o roteiro de apresentação, as evidências que devem ser demonstradas e o estado final dos componentes e controles implementados.**
 
 <details>
 <summary><b>Ver roteiro, validações e estado final do laboratório</b></summary>
@@ -1090,7 +1090,7 @@ Esse modelo permite administrar privilégios de maneira centralizada, reduzir co
 
 Agradecimento especial a **Edson Bezerra**
 
-**Manager, LATAM Cyber Security Infrastructure Services — DXC Technology**
+(**Manager, LATAM Cyber Security Infrastructure Services — DXC Technology**)
 
 pela mentoria, direcionamento técnico e proposta utilizada como base para o desenvolvimento deste laboratório.
 
