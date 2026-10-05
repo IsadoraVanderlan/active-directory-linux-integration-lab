@@ -9,16 +9,16 @@ O projeto demonstra, de forma prática, **identidade centralizada, autenticaçã
 > **Modelo central do projeto:** `Identidade → Função → Permissão → Recurso`
 
 ---
+---
 
 ## 📋 Proposta do Projeto
 
 Requisitos que deram origem ao laboratório, contemplando Active Directory, Windows, Linux, integração com o domínio e demonstrações de Gestão de Acessos.
 
 <details>
-<summary></summary> <b>Ver requisitos completos do projeto</b></summary>
+<summary></summary><b>Ver requisitos completos do projeto</b></summary>
 
 <br>
-<br/>
 
 A proposta do projeto apresentada pelo gerente **Edson Bezerra** foi construir um laboratório capaz de demonstrar os principais conceitos de **Gestão de Identidades e Acessos** em ambientes Windows e Linux.
 
