@@ -137,7 +137,7 @@ A sincronização de horário é importante principalmente para os mecanismos de
 
 ## 🔐 Modelo IAM e Controle de Acesso (AuthZ)
 
-Demonstra como identidades, grupos de função e grupos de permissão foram organizados para controlar privilégios sem atribuí-los diretamente aos usuários.
+> **Demonstra como identidades, grupos de função e grupos de permissão foram organizados para controlar privilégios sem atribuí-los diretamente aos usuários.**
 
 <details>
 <summary><b>Ver identidades, grupos, autorização e Least Privilege</b></summary>
@@ -340,7 +340,7 @@ O `gpresult /r` permite verificar o domínio e as políticas aplicadas ao comput
 
 ## 🐧 Integração Linux + Active Directory
 
-Demonstra a integração do Debian e Rocky Linux ao domínio, reconhecimento de identidades e grupos, autenticação Kerberos, SSSD e concessão de sudo por grupo do Active Directory.
+> **Demonstra a integração do Debian e Rocky Linux ao domínio, reconhecimento de identidades e grupos, autenticação Kerberos, SSSD e concessão de sudo por grupo do Active Directory.**
 
 <details>
 <summary><b>Ver integração, comandos e testes nos servidores Linux</b></summary>
