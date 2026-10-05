@@ -15,9 +15,10 @@ O projeto demonstra, de forma prática, **identidade centralizada, autenticaçã
 Requisitos que deram origem ao laboratório, contemplando Active Directory, Windows, Linux, integração com o domínio e demonstrações de Gestão de Acessos.
 
 <details>
-<summary>🔎 <b>Ver requisitos completos do projeto</b></summary>
+<summary></summary> <b>Ver requisitos completos do projeto</b></summary>
 
 <br>
+<br/>
 
 A proposta do projeto apresentada pelo gerente **Edson Bezerra** foi construir um laboratório capaz de demonstrar os principais conceitos de **Gestão de Identidades e Acessos** em ambientes Windows e Linux.
 
@@ -83,7 +84,7 @@ Visão do ambiente utilizado para centralizar identidades no Active Directory e 
 ![Diagrama de Arquitetura e Fluxo de Gestão de Acessos](./IAM%20Access%20Management.jpg)
 
 <details>
-<summary>🖥️ <b>Ver detalhes da arquitetura e do DC01</b></summary>
+<summary><b>Ver detalhes da arquitetura e do DC01</b></summary>
 
 <br>
 
@@ -131,7 +132,7 @@ A sincronização de horário é importante principalmente para os mecanismos de
 Demonstra como identidades, grupos de função e grupos de permissão foram organizados para controlar privilégios sem atribuí-los diretamente aos usuários.
 
 <details>
-<summary>👤 <b>Ver identidades, grupos, autorização e Least Privilege</b></summary>
+<summary><b>Ver identidades, grupos, autorização e Least Privilege</b></summary>
 
 <br>
 
@@ -286,7 +287,7 @@ Após essa separação, o sudo foi novamente testado no Debian e no Rocky para c
 Demonstra o ingresso do `CLI01` no domínio e a aplicação centralizada de políticas através de GPO.
 
 <details>
-<summary>🪟 <b>Ver configuração e validações do Windows</b></summary>
+<summary><b>Ver configuração e validações do Windows</b></summary>
 
 <br>
 
@@ -328,7 +329,7 @@ O `gpresult /r` permite verificar o domínio e as políticas aplicadas ao comput
 Demonstra a integração do Debian e Rocky Linux ao domínio, reconhecimento de identidades e grupos, autenticação Kerberos, SSSD e concessão de sudo por grupo do Active Directory.
 
 <details>
-<summary>🐧 <b>Ver integração, comandos e testes nos servidores Linux</b></summary>
+<summary><b>Ver integração, comandos e testes nos servidores Linux</b></summary>
 
 <br>
 
@@ -802,7 +803,7 @@ Autenticação restaurada
 Reúne os princípios de segurança aplicados no laboratório, os riscos identificados, as respectivas mitigações e o status do controle de login/SSH por grupo.
 
 <details>
-<summary>🛡️ <b>Ver controles IAM, riscos e mitigações</b></summary>
+<summary><b>Ver controles IAM, riscos e mitigações</b></summary>
 
 <br>
 
@@ -897,7 +898,7 @@ Por esse motivo, o README não considera esse controle como concluído neste mom
 Consolida o roteiro de apresentação, as evidências que devem ser demonstradas e o estado final dos componentes e controles implementados.
 
 <details>
-<summary>✅ <b>Ver roteiro, validações e estado final do laboratório</b></summary>
+<summary><b>Ver roteiro, validações e estado final do laboratório</b></summary>
 
 <br>
 
@@ -1059,30 +1060,7 @@ Esse modelo permite administrar privilégios de maneira centralizada, reduzir co
 
 ---
 
-## 📚 Tecnologias Utilizadas
-
-Tecnologias, protocolos e ferramentas utilizados na construção e validação do laboratório.
-
-<details>
-<summary>🧰 <b>Ver tecnologias e agradecimentos</b></summary>
-
-<br>
-
-- Microsoft Windows Server
-- Active Directory Domain Services
-- DNS
-- Kerberos
-- Group Policy
-- Windows 11
-- Debian Linux
-- Rocky Linux
-- Realmd
-- SSSD
-- Sudo
-- PowerShell
-- Linux CLI
-
-#### Agradecimentos
+### Agradecimentos
 
 Agradecimento especial a **Edson Bezerra**
 
