@@ -15,7 +15,7 @@ O projeto demonstra, de forma prática, **identidade centralizada, autenticaçã
 
 ## 📋 Proposta do Projeto
 
-**Requisitos que deram origem ao laboratório, contemplando Active Directory, Windows, Linux, integração com o domínio e demonstrações de Gestão de Acessos.**
+> **Requisitos que deram origem ao laboratório, contemplando Active Directory, Windows, Linux, integração com o domínio e demonstrações de Gestão de Acessos.**
 
 <details>
 <summary><b>Ver requisitos completos do projeto</b></summary>
