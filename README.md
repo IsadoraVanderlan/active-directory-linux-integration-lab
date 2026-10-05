@@ -8,7 +8,7 @@ O projeto demonstra, de forma prática, **identidade centralizada, autenticaçã
 
 > **Modelo central do projeto:** `Identidade → Função → Permissão → Recurso`
 
----
+----
 ---
 
 ## 📋 Proposta do Projeto
@@ -16,7 +16,7 @@ O projeto demonstra, de forma prática, **identidade centralizada, autenticaçã
 Requisitos que deram origem ao laboratório, contemplando Active Directory, Windows, Linux, integração com o domínio e demonstrações de Gestão de Acessos.
 
 <details>
-<summary></summary><b>Ver requisitos completos do projeto</b></summary>
+<summary><b>Ver requisitos completos do projeto</b></summary>
 
 <br>
 
@@ -126,6 +126,8 @@ A sincronização de horário é importante principalmente para os mecanismos de
 </details>
 
 ---
+
+----
 
 ## 🔐 Modelo IAM e Controle de Acesso (AuthZ)
 
