@@ -77,6 +77,9 @@ Durante a apresentação devem ser explicados:
 
 </details>
 
+<br/>
+<br>
+
 ---
 
 ## 🗺️ Arquitetura e Ambiente Integrado
@@ -127,9 +130,10 @@ A sincronização de horário é importante principalmente para os mecanismos de
 
 </details>
 
----
+<br/>
+<br>
 
-----
+---
 
 ## 🔐 Modelo IAM e Controle de Acesso (AuthZ)
 
@@ -284,6 +288,9 @@ Após essa separação, o sudo foi novamente testado no Debian e no Rocky para c
 
 </details>
 
+<br/>
+<br>
+
 ---
 
 ## 💻 Windows no Domínio
@@ -325,6 +332,9 @@ gpresult /r
 O `gpresult /r` permite verificar o domínio e as políticas aplicadas ao computador/usuário.
 
 </details>
+
+<br/>
+<br>
 
 ---
 
@@ -568,6 +578,9 @@ Esse comportamento foi observado principalmente durante os testes de concessão 
 
 </details>
 
+<br/>
+<br>
+
 ---
 
 ## 🔄 Ciclo de Vida da Identidade e do Acesso
@@ -800,6 +813,9 @@ Autenticação restaurada
 
 </details>
 
+<br/>
+<br>
+
 ---
 
 ## 🛡️ Controles de Segurança e Riscos
@@ -894,6 +910,9 @@ O controle explícito de **login/SSH permitido ou negado com base em um grupo es
 Por esse motivo, o README não considera esse controle como concluído neste momento.
 
 </details>
+
+<br/>
+<br>
 
 ---
 
@@ -1062,9 +1081,12 @@ Esse modelo permite administrar privilégios de maneira centralizada, reduzir co
 
 </details>
 
+<br/>
+<br>
+
 ---
 
-### Agradecimentos
+## Agradecimentos
 
 Agradecimento especial a **Edson Bezerra**
 
