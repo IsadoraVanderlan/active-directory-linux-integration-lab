@@ -87,12 +87,12 @@ Durante a apresentação devem ser explicados:
 > **Nesta seção, apresento as validações práticas das configurações realizadas no laboratório. Os vídeos demonstram o comportamento do ambiente em tempo real, incluindo os testes de autenticação, integração SSSD e validação de políticas do Active Directory.**
 
 
-* 🔹 **Validação de GPO e Autenticação:** [Assistir ao vídeo](/Videos/1.gif)
+![Demonstração do Vídeo 1](./Videos/1.gif)
 
 <br>
 
 <details>
-* 🔹 **Integração SSSD e Teste de Domínio no Debian:** [Assistir ao vídeo](LINK_DO_SEU_VIDEO_AQUI)
+![Demonstração do Vídeo 1]()
 
 </details>
 
