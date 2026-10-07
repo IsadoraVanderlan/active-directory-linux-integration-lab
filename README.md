@@ -89,6 +89,8 @@ Durante a apresentação devem ser explicados:
 
 * 🔹 **Validação de GPO e Autenticação:** [Assistir ao vídeo](/Videos/1.gif)
 
+<br>
+
 <details>
 * 🔹 **Integração SSSD e Teste de Domínio no Debian:** [Assistir ao vídeo](LINK_DO_SEU_VIDEO_AQUI)
 
