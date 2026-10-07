@@ -82,6 +82,26 @@ Durante a apresentação devem ser explicados:
 
 ---
 
+## 📹 Demonstração Prática e Testes em Vídeo
+
+> **Nesta seção, apresento as validações práticas das configurações realizadas no laboratório. Os vídeos demonstram o comportamento do ambiente em tempo real, incluindo os testes de autenticação, integração SSSD e validação de políticas do Active Directory.**
+
+
+* 🔹 **Validação de GPO e Autenticação:** [Assistir ao vídeo](/Videos/1.gif)
+
+<details>
+
+> Nesta seção, apresento as gravações em vídeo comprovando a execução dos testes, a aplicação das diretivas de grupo (GPO) e o comportamento da autenticação e integração entre o Windows Server e a VM Debian no Active Directory.
+
+* 🔹 **Integração SSSD e Teste de Domínio no Debian:** [Assistir ao vídeo](LINK_DO_SEU_VIDEO_AQUI)
+
+</details>
+
+<br/>
+<br>
+
+---
+
 ## 🗺️ Arquitetura e Ambiente Integrado
 
 > **Visão do ambiente utilizado para centralizar identidades no Active Directory e integrar estações Windows e servidores Linux ao domínio `lab.local`.**
