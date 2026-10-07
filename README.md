@@ -91,7 +91,10 @@ Durante a apresentação devem ser explicados:
 
 <br>
 
-<details>
+<details> <summary>▶️ Ver mais vídeos</summary>
+![Demonstração do Vídeo 1]()
+![Demonstração do Vídeo 1]()
+![Demonstração do Vídeo 1]()
 ![Demonstração do Vídeo 1]()
 
 </details>
