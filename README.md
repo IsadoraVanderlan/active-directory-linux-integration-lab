@@ -90,9 +90,6 @@ Durante a apresentação devem ser explicados:
 * 🔹 **Validação de GPO e Autenticação:** [Assistir ao vídeo](/Videos/1.gif)
 
 <details>
-
-> Nesta seção, apresento as gravações em vídeo comprovando a execução dos testes, a aplicação das diretivas de grupo (GPO) e o comportamento da autenticação e integração entre o Windows Server e a VM Debian no Active Directory.
-
 * 🔹 **Integração SSSD e Teste de Domínio no Debian:** [Assistir ao vídeo](LINK_DO_SEU_VIDEO_AQUI)
 
 </details>
