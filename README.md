@@ -82,28 +82,6 @@ Durante a apresentação devem ser explicados:
 
 ---
 
-## 📹 Demonstração Prática e Testes em Vídeo
-
-> **Nesta seção, apresento as validações práticas das configurações realizadas no laboratório. Os vídeos demonstram o comportamento do ambiente em tempo real, incluindo os testes de autenticação, integração SSSD e validação de políticas do Active Directory.**
-
-
-![Demonstração do Vídeo 1](./Videos/1.gif)
-
-<br>
-
-<details> <summary>▶️ Ver mais vídeos</summary>
-![Demonstração do Vídeo 1]()
-![Demonstração do Vídeo 1]()
-![Demonstração do Vídeo 1]()
-![Demonstração do Vídeo 1]()
-
-</details>
-
-<br/>
-<br>
-
----
-
 ## 🗺️ Arquitetura e Ambiente Integrado
 
 > **Visão do ambiente utilizado para centralizar identidades no Active Directory e integrar estações Windows e servidores Linux ao domínio `lab.local`.**
