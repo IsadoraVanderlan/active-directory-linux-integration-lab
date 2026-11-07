@@ -1088,8 +1088,6 @@ Esse modelo permite administrar privilégios de maneira centralizada, reduzir co
 
 ## Agradecimentos
 
-Agradecimento especial a 🔗 [Edson Bezerra](https://www.linkedin.com/in/edsbezerra/)
-
-pela mentoria, direcionamento técnico e proposta utilizada como base para o desenvolvimento deste laboratório.
+Agradecimento especial a [Edson Bezerra](https://www.linkedin.com/in/edsbezerra/), pela mentoria, direcionamento técnico e proposta utilizada como base para o desenvolvimento deste laboratório.
 
 </details>
