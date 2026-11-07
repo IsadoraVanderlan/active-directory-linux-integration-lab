@@ -1088,9 +1088,7 @@ Esse modelo permite administrar privilégios de maneira centralizada, reduzir co
 
 ## Agradecimentos
 
-Agradecimento especial a **Edson Bezerra**
-
-(**Manager, LATAM Cyber Security Infrastructure Services — DXC Technology**)
+Agradecimento especial a 🔗 [Edson Bezerra](https://www.linkedin.com/in/edsbezerra/)
 
 pela mentoria, direcionamento técnico e proposta utilizada como base para o desenvolvimento deste laboratório.
 
